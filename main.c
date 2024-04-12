@@ -1,16 +1,24 @@
 #include <stdio.h>
 #include "tarefas.h"
 
-int main(){
+
+
+
+int main(){  
     funcao fs[] = {criar, deletar, listar, salvar, carregar};
-
+  
     Tarefa tarefas[TOTAL];
-    int pos;
-    ERROS erro = fs[4](tarefas, &pos);
-    if(erro != OK)
-        pos = 0;
-
-    int opcao;
+    int pos = 0;
+    ERROS erro = carregar(tarefas, &pos);
+    if(erro != ABRIR){
+      pos = 0;
+      printf("Arquivo não encontrado\n");
+    }
+    else if (pos == LER || pos == FECHAR){
+      printf("Arquivo vazio\n");
+    }  
+  
+      int opcao;
     do{
         printf("\nMenu principal\n");
         printf("1 - Criar tarefa\n");
@@ -18,17 +26,20 @@ int main(){
         printf("3 - Listar tarefas\n");
         printf("0 - Sair\n");
         printf("Escolha uma opcao: ");
-
         scanf("%d", &opcao);
-        opcao--;
-        if(opcao > 2)
-            printf("Opcao invalida\n");
-        else if(opcao >= 0)
-            fs[opcao](tarefas, &pos);
-        else
-            printf("Sair...\n");
+        
 
-    } while(opcao >= 0);
-
-    fs[3](tarefas, &pos);
+        if(opcao == 1){
+          criar(tarefas, &pos); 
+        }else if(opcao == 2){
+          deletar(tarefas, &pos);
+        }else if (opcao == 3){
+          listar(tarefas, pos);
+        }else if (opcao == 0){
+          printf("Sair...\n");
+          break;
+        }else {
+          printf("opção inválida\n");
+        }
+    } while(opcao != 0);
 }
