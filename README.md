@@ -1,1 +1,1 @@
-# projeto0-2024-1
+# Codigo que pede para o usuário escolher uma opção e dentro dessas oção escolhidas ela imprime informações a serem preenchidas onde após isso as informações serão salvas em blocos de memória através de poteiros no qual o usuário pode ter acesso a esas irfomações. 
